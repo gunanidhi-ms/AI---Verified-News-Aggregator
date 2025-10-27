@@ -181,20 +181,27 @@ Install the necessary Node.js packages (e.g., for Express, build tools, or utili
 npm install
 ```
 
-3. Frontend Setup
+## 3. Frontend Setup
 
-Navigate to the frontend directory:
+The frontend is the user interface built with **React**.
 
-cd ../frontend
+### Navigate and Install Dependencies
 
+1.  Navigate to the frontend directory:
+    ```bash
+    cd ../frontend
+    ```
 
-Install dependencies:
+2.  Install Frontend Dependencies:
+    ```bash
+    npm install
+    ```
 
-npm install
+### Create Frontend `.env` File
 
+Create a file named **`.env`** in the `frontend/` directory and add your Firebase credentials:
 
-Create a .env file in the frontend/ directory and add your Firebase credentials:
-
+```env
 REACT_APP_FIREBASE_API_KEY=your_api_key
 REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
 REACT_APP_FIREBASE_PROJECT_ID=your_project_id
@@ -202,46 +209,62 @@ REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 REACT_APP_FIREBASE_APP_ID=your_app_id
 REACT_APP_FIREBASE_MEASUREMENT_ID=your_measurement_id
+```
 
+## 8. Running the Application (Step-by-Step)
 
-Ensure .env is listed in .gitignore to protect credentials.
+You will need **two separate terminal windows** to run the application simultaneously.
 
-4. Running the Application (Step-by-Step)
-Terminal 1 – Start Backend Server
+### Terminal 1 – Start Backend Server
+
+Open the first terminal, navigate to the backend, activate the environment, and start the server.
+
+```bash
 cd backend
-venv\Scripts\activate    # or source venv/bin/activate (for macOS/Linux)
-nodemon index.js
+venv\Scripts\activate          # or source venv/bin/activate (for macOS/Linux)
+npx nodemon server.js          # Assuming server.js is your entry file
+# OR for Python Flask:
+# python app.py
+```
 
 
-The backend runs on http://localhost:3000
-.
+The backend runs on http://localhost:5000.
 
-Terminal 2 – Start Frontend (React)
+### Terminal 2 – Start Frontend (React)
+
+Open the second terminal, navigate to the frontend, and start the development server.
+
+```bash
 cd frontend
 npm start
+```
 
+The frontend runs on http://localhost:3000 (or whichever port is shown in the terminal, e.g., 5173 for Vite projects).
 
-The frontend runs on http://localhost:5173
- (or whichever port appears in terminal).
+---
 
-API Endpoints
-Endpoint	Method	Description
-/api/news	GET	Fetches all verified news
-/api/news/:category	GET	Fetches category-specific news
-/api/verify	POST	Runs verification for a given article
-/api/summarize	POST	Summarizes the given content text
-Future Improvements
+## 9. API Endpoints
 
-Add abstractive summarization (using T5 or Pegasus).
+| Endpoint             | Method | Description                                                          |
+|----------------------|--------|----------------------------------------------------------------------|
+| `/api/news`          | GET    | Fetches all verified news articles.                                  |
+| `/api/news/:category`| GET    | Fetches news specific to a category (e.g., 'technology').            |
+| `/api/verify`        | POST   | Runs the multi-source verification pipeline for a given article URL/text. |
+| `/api/summarize`     | POST   | Summarizes the given content text.                                   |
 
-Integrate Redis or MongoDB for persistent caching.
+---
 
-Implement bias detection across publishers.
+## 10. Future Improvements
 
-Add user dashboards for personalization and saved articles.
+- Implement abstractive summarization (using models like T5 or Pegasus) for more human-like summaries.  
+- Integrate Redis or MongoDB for a robust, persistent caching solution.  
+- Add bias detection across publishers to flag editorial leanings.  
+- Develop user dashboards for personalization and saved articles.  
+- Set up a CI/CD pipeline and deploy using Docker.
 
-Deploy via Docker and set up CI/CD pipeline.
+---
 
-License
+## 11. License
 
 This project is open source and distributed under the MIT License.
+
