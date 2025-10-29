@@ -20,10 +20,10 @@ export default function App() {
     return () => unsub && unsub();
   }, []);
 
-  // ⏳ Show temporary loader while Firebase checks session
+  // Show temporary loader while Firebase checks session
   if (loading) return <p className="text-center mt-10 text-gray-600">Loading...</p>;
 
-  // 🔒 Auto redirect to login if not authenticated (session ended / tab closed)
+  // Auto redirect to login if not authenticated (session ended / tab closed)
   if (!user) return <Login onLogin={() => setUser(auth.currentUser)} />;
 
   return (

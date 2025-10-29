@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
-const cors = require("cors"); // ✅ import cors
+const cors = require("cors"); // import cors
 require("dotenv").config();
 
 const app = express();
@@ -10,7 +10,7 @@ const newsRouter = require("./routes/news");
 const PORT = process.env.PORT || 5000;
 const HOST = `http://localhost:${PORT}`;
 
-// ✅ Enable CORS for frontend origin (React)
+// Enable CORS for frontend origin (React)
 app.use(
   cors({
     origin: "http://localhost:3000", // frontend address

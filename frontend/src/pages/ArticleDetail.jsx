@@ -5,7 +5,7 @@ import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 
 export default function ArticleDetail({ article, onBack }) {
   const [liked, setLiked] = useState(false);
-  const [imgError, setImgError] = useState(false); // ✅ Track image load errors
+  const [imgError, setImgError] = useState(false); // Track image load errors
 
   if (!article) return null;
 
@@ -15,10 +15,10 @@ export default function ArticleDetail({ article, onBack }) {
   let verificationColor = "text-red-600";
 
   if (article.verified === true) {
-    verificationLabel = "✅ Verified News";
+    verificationLabel = "Verified News";
     verificationColor = "text-green-600";
   } else if (verifiedScore > 0 && verifiedScore < 1) {
-    verificationLabel = "🟡 Partially Verified";
+    verificationLabel = "Partially Verified";
     verificationColor = "text-yellow-600";
   }
 
@@ -44,7 +44,7 @@ export default function ArticleDetail({ article, onBack }) {
     }
   };
 
-  // ✅ Default fallback image URL
+  // Default fallback image URL
   const defaultImage = "https://tse4.mm.bing.net/th/id/OIP.8GWxDEp1bmhqwBL7Z1szTwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"; // Place this in your /public folder
 
   // Decide which image to show
@@ -61,7 +61,7 @@ export default function ArticleDetail({ article, onBack }) {
           ← Back
         </button>
 
-        {/* ✅ Robust image handling */}
+        {/* Robust image handling */}
         <img
           src={imageToShow}
           alt={article.title || "News image"}
@@ -74,14 +74,14 @@ export default function ArticleDetail({ article, onBack }) {
           {verificationLabel}
         </p>
 
-        <h3 className="text-xl font-semibold mt-4 mb-2">📌 Summarised Content:</h3>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Summarised Content:</h3>
         <ul className="list-disc ml-6 text-gray-700 mb-4">
           {Array.isArray(article.summary)
             ? article.summary.map((point, idx) => <li key={idx}>{point}</li>)
             : <li>{article.summary || article.description || "No summary available."}</li>}
         </ul>
 
-        <h3 className="text-green-600 font-semibold mb-2">✅ Verified by:</h3>
+        <h3 className="text-green-600 font-semibold mb-2">Verified by:</h3>
         <ul className="list-disc ml-6 mb-4">
           {(article.verified_sources || []).map((src, i) => {
             const name = typeof src === "string" ? src : src.source || src.name || "Unknown";

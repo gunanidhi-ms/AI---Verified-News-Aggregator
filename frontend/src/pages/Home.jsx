@@ -36,7 +36,7 @@ export default function Home({ onSelectArticle }) {
         if (mounted) setLoading(false);
       });
 
-    // ✅ Save selected sector to sessionStorage (instead of localStorage)
+    // Save selected sector to sessionStorage (instead of localStorage)
     sessionStorage.setItem("lastSector", sector);
 
     return () => (mounted = false);
@@ -45,10 +45,10 @@ export default function Home({ onSelectArticle }) {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center text-blue-700 mb-4">
-        🧠 AI Verified News Feed
+        AI Verified News Feed
       </h1>
 
-      {/* ✅ Lowercase enforced */}
+      {/* Lowercase enforced */}
       <SectorTabs activeSector={sector} onChange={(s) => setSector(s.toLowerCase())} />
 
       {loading && <p className="text-center text-gray-600">Loading articles…</p>}

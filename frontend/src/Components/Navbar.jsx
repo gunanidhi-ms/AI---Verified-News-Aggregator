@@ -12,7 +12,7 @@ export default function Navbar({ user }) {
     <nav className="flex items-center justify-between bg-white shadow-md px-6 py-3 sticky top-0 z-50">
       {/* App Logo / Title */}
       <h1 className="text-xl font-bold text-blue-600">
-        🧠 Verified News
+        Verified News
       </h1>
 
       {/* Right Section */}

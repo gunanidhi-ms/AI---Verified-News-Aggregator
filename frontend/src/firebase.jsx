@@ -4,27 +4,26 @@ import { getAuth, setPersistence, browserSessionPersistence } from "firebase/aut
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAF33bNHTzQt0eMBfLWyPbi5Z4yrPUvd9E",
-  authDomain: "ai-news-aggregator-3b5bb.firebaseapp.com",
-  databaseURL: "https://ai-news-aggregator-3b5bb-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ai-news-aggregator-3b5bb",
-  storageBucket: "ai-news-aggregator-3b5bb.firebasestorage.app",
-  messagingSenderId: "120922610371",
-  appId: "1:120922610371:web:af2e85d9e5b8a6e000e076",
-  measurementId: "G-6NFF5ZHJNT",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-// 🔥 Initialize Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// ✅ Auth + Firestore setup
+// Auth + Firestore setup
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ✅ Auto logout when tab closed (session-only mode)
+// Session-only mode (auto logout when tab closes)
 setPersistence(auth, browserSessionPersistence)
   .then(() => console.log("Firebase session persistence: ACTIVE"))
   .catch((err) => console.error("Session persistence error:", err));
 
-// ✅ Export both
 export { auth, db };

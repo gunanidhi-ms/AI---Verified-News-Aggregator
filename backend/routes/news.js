@@ -321,26 +321,26 @@ router.get("/fetch", async (req, res) => {
 
     const cached = getCache(sector);
 
-    // ✅ Serve cached if available (and not startup)
+    // Serve cached if available (and not startup)
     if (cached && !startup) {
       console.log(`Serving ${sector} from cache`);
       return res.json({ category: sector, articles: cached, cached: true });
     }
 
-    // 📰 Fetch new articles
+    // Fetch new articles
     const articles = await fetchRawArticles(sourceGroups[sector]);
     if (!articles.length) {
       return res.status(404).json({ error: "No articles found" });
     }
 
     if (startup) {
-      // 🔹 During server startup → wait until processing & caching done
+      // During server startup → wait until processing & caching done
       console.log(`Startup mode: fully processing ${sector}...`);
       await processSector(sector, articles);
       const updated = getCache(sector);
       return res.json({ category: sector, articles: updated || [], cached: false });
     } else {
-      // ⚡ Normal frontend call → queue background processing
+      // Normal frontend call → queue background processing
       console.log(`Frontend mode: queuing ${sector} processing...`);
       await processSector(sector, articles);
       return res.json({ category: sector, status: "queued", cached: false });
