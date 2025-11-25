@@ -29,9 +29,6 @@ function cleanEncoding(text = "") {
     .trim();
 }
 
-/* ---------------------------------------------------------
-   2. Utility: Article Preprocessor
---------------------------------------------------------- */
 function preprocessArticle(article) {
   return {
     title: cleanEncoding(article.title || "Untitled"),
@@ -46,9 +43,6 @@ function preprocessArticle(article) {
   };
 }
 
-/* ---------------------------------------------------------
-   3. Python Helper Functions
---------------------------------------------------------- */
 function runPython(scriptName, inputData) {
   return new Promise((resolve, reject) => {
     const scriptPath = path.resolve(__dirname, `../${scriptName}`);
@@ -71,9 +65,7 @@ function runPython(scriptName, inputData) {
   });
 }
 
-/* ---------------------------------------------------------
-   4. Caching System
---------------------------------------------------------- */
+
 const CACHE_DIR = path.join(__dirname, "../cache");
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR);
 
@@ -91,9 +83,6 @@ function saveCache(sector, data) {
   fs.writeFileSync(path.join(CACHE_DIR, `${sector}.json`), JSON.stringify(data, null, 2));
 }
 
-/* ---------------------------------------------------------
-   5. Fetch + Process Pipeline
---------------------------------------------------------- */
 async function fetchRawArticles(sources) {
   if (!process.env.NEWS_API_KEY) {
     console.warn("Missing NEWS_API_KEY");
@@ -126,9 +115,6 @@ async function processSector(sector, articles) {
   }
 }
 
-/* ---------------------------------------------------------
-   6. Source Groups
---------------------------------------------------------- */
 const sourceGroups = {
   business: [
     "business-insider",
